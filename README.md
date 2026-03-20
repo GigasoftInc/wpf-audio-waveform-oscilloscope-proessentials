@@ -352,3 +352,5 @@ no trial-and-error on property names, no guessed enum values. If you are
 building a ProEssentials integration and using AI assistance, the
 `pe_query.py` resources are available in the
 [Gigasoft GitHub organization](https://github.com/GigasoftInc).
+
+

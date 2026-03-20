@@ -1,0 +1,107 @@
+// Lyric timing — direct SRT phrase index lookup
+// Each lyric line mapped to its exact phrase-start index in stable-ts SRT
+// Timestamps are the exact millisecond that phrase begins in the audio
+
+namespace AudioWaveform
+{
+    public static class LyricsWhatIAlreadyDone
+    {
+        public struct LyricLine { public int StartMs; public int EndMs; public string Text; }
+
+        public static readonly LyricLine[] Lines =
+        {
+            new LyricLine { StartMs =      0, EndMs =   2710, Text = "I gave them line charts, bar charts, pie" },
+            new LyricLine { StartMs =   2760, EndMs =   5010, Text = "Polar scatter, multi-axes reaching to the sky" },
+            new LyricLine { StartMs =   5060, EndMs =   7750, Text = "Smith charts and OHLC, financial grade" },
+            new LyricLine { StartMs =   7800, EndMs =  10530, Text = "Three dimensions, surfaces, contour overlays made" },
+            new LyricLine { StartMs =  10580, EndMs =  13550, Text = "They copied every feature, called it their own" },
+            new LyricLine { StartMs =  13600, EndMs =  15870, Text = "But there's one thing I built they can't clone" },
+            new LyricLine { StartMs =  15920, EndMs =  18280, Text = "An AI that reads the binary D.L.L." },
+            new LyricLine { StartMs =  18330, EndMs =  21450, Text = "Validates every property — does it right, does it well" },
+            new LyricLine { StartMs =  21500, EndMs =  23530, Text = "They're still reading docs" },
+            new LyricLine { StartMs =  23580, EndMs =  26190, Text = "I'm talking to the machine" },
+            new LyricLine { StartMs =  26240, EndMs =  28890, Text = "While they're guessing property names" },
+            new LyricLine { StartMs =  28940, EndMs =  32770, Text = "Mine come back clean" },
+            new LyricLine { StartMs =  32820, EndMs =  35370, Text = "I'm the one who built it first" },
+            new LyricLine { StartMs =  35420, EndMs =  37770, Text = "Watch them scramble, watch them thirst" },
+            new LyricLine { StartMs =  37820, EndMs =  40370, Text = "P.E. Query running deep" },
+            new LyricLine { StartMs =  40420, EndMs =  42570, Text = "While the hyped charts lose their sleep" },
+            new LyricLine { StartMs =  42620, EndMs =  45290, Text = "I set this A.P.I. on fire" },
+            new LyricLine { StartMs =  45340, EndMs =  47690, Text = "Built for A.I., built higher" },
+            new LyricLine { StartMs =  47740, EndMs =  49090, Text = "They can copy all they want" },
+            new LyricLine { StartMs =  49140, EndMs =  53990, Text = "But they'll always be the response to what I already done" },
+            new LyricLine { StartMs =  54040, EndMs =  56470, Text = "Pie charts, polar, Smith charts too" },
+            new LyricLine { StartMs =  56520, EndMs =  57790, Text = "Multi-axes synchronized, all coming through" },
+            new LyricLine { StartMs =  57840, EndMs =  61950, Text = "1200 properties, 167 enums strong" },
+            new LyricLine { StartMs =  62000, EndMs =  64190, Text = "A.I. validates every one — never gets it wrong" },
+            new LyricLine { StartMs =  64240, EndMs =  66650, Text = "They say their A.P.I. is clean" },
+            new LyricLine { StartMs =  66700, EndMs =  69250, Text = "I say come and look at mine" },
+            new LyricLine { StartMs =  69300, EndMs =  72050, Text = "Binary verified, ground truth guaranteed" },
+            new LyricLine { StartMs =  72100, EndMs =  74750, Text = "Every single time" },
+            new LyricLine { StartMs =  74800, EndMs =  76290, Text = "While they're writing wrappers" },
+            new LyricLine { StartMs =  76340, EndMs =  78510, Text = "I'm pointing at the source" },
+            new LyricLine { StartMs =  78560, EndMs =  81610, Text = "Validated D.L.L." },
+            new LyricLine { StartMs =  81660, EndMs =  85590, Text = "No guessing, no remorse" },
+            new LyricLine { StartMs =  85640, EndMs =  88730, Text = "I'm the one who built it first" },
+            new LyricLine { StartMs =  88780, EndMs =  91810, Text = "Watch them scramble, watch them thirst" },
+            new LyricLine { StartMs =  91860, EndMs =  93750, Text = "P.E. Query running deep" },
+            new LyricLine { StartMs =  93800, EndMs =  95730, Text = "While the hyped charts lose their sleep" },
+            new LyricLine { StartMs =  95780, EndMs =  98450, Text = "I set this A.P.I. on fire" },
+            new LyricLine { StartMs =  98500, EndMs =  99750, Text = "Built for A.I., built higher" },
+            new LyricLine { StartMs =  99800, EndMs = 102390, Text = "They can copy all they want" },
+            new LyricLine { StartMs = 102440, EndMs = 105920, Text = "But they'll always be the response to what I already done" },
+            new LyricLine { StartMs = 105970, EndMs = 109130, Text = "Got a unified doc, every example mapped" },
+            new LyricLine { StartMs = 109180, EndMs = 111770, Text = "116 working demos, nothing left unwrapped" },
+            new LyricLine { StartMs = 111820, EndMs = 114770, Text = "J.S.O.N. synonym index — A.I. finds the path" },
+            new LyricLine { StartMs = 114820, EndMs = 117070, Text = "Even when you phrase it wrong, it does the math" },
+            new LyricLine { StartMs = 117120, EndMs = 119750, Text = "allExamples feeding context to the mind" },
+            new LyricLine { StartMs = 119800, EndMs = 122390, Text = "Not just checking — it can reason, it can find" },
+            new LyricLine { StartMs = 122440, EndMs = 125150, Text = "Ask it something vague, it narrows down the call" },
+            new LyricLine { StartMs = 125200, EndMs = 127710, Text = "Validates the binary, gets it right for all" },
+            new LyricLine { StartMs = 127760, EndMs = 130410, Text = "They've got docs behind a paywall, forums full of guesses" },
+            new LyricLine { StartMs = 130460, EndMs = 133070, Text = "Stack Overflow answers three versions old" },
+            new LyricLine { StartMs = 133120, EndMs = 135770, Text = "I've got ground truth living in the compiled D.L.L." },
+            new LyricLine { StartMs = 135820, EndMs = 138530, Text = "Every property, every enum — A.I. knows it well" },
+            new LyricLine { StartMs = 138580, EndMs = 141390, Text = "Synonym featured index — thinking on its own" },
+            new LyricLine { StartMs = 141440, EndMs = 144050, Text = "No hallucination, no property unknown" },
+            new LyricLine { StartMs = 144100, EndMs = 146690, Text = "While their A.I. confidently writes the wrong A.P.I. call" },
+            new LyricLine { StartMs = 146740, EndMs = 150130, Text = "Mine comes back verified — correct or not at all" },
+            new LyricLine { StartMs = 150180, EndMs = 152950, Text = "They're shipping A.I. wrappers" },
+            new LyricLine { StartMs = 153000, EndMs = 156350, Text = "Built on documentation lies" },
+            new LyricLine { StartMs = 156400, EndMs = 158330, Text = "Mine reads the binary" },
+            new LyricLine { StartMs = 158380, EndMs = 160870, Text = "With its own eyes" },
+            new LyricLine { StartMs = 160920, EndMs = 162890, Text = "I'm the one who built it first" },
+            new LyricLine { StartMs = 162940, EndMs = 166050, Text = "Watch them scramble, watch them thirst" },
+            new LyricLine { StartMs = 166100, EndMs = 168370, Text = "P.E. Query running deep" },
+            new LyricLine { StartMs = 168420, EndMs = 170530, Text = "While the hyped charts lose their sleep" },
+            new LyricLine { StartMs = 170580, EndMs = 173290, Text = "I set this A.P.I. on fire" },
+            new LyricLine { StartMs = 173340, EndMs = 175670, Text = "Built for A.I., built higher" },
+            new LyricLine { StartMs = 175720, EndMs = 177090, Text = "They can copy all they want" },
+            new LyricLine { StartMs = 177140, EndMs = 182300, Text = "But they'll always be the response to what I already done" },
+            new LyricLine { StartMs = 182350, EndMs = 186110, Text = "You know what's funny — they'll read this song" },
+            new LyricLine { StartMs = 186160, EndMs = 190190, Text = "Screenshot it, put it in a blog post" },
+            new LyricLine { StartMs = 190240, EndMs = 192610, Text = "Call it inspiration" },
+            new LyricLine { StartMs = 192660, EndMs = 195350, Text = "But P.E. Query will still be mine" },
+            new LyricLine { StartMs = 195400, EndMs = 196970, Text = "Ground truth validated" },
+            new LyricLine { StartMs = 197020, EndMs = 199370, Text = "Against the compiled binary" },
+            new LyricLine { StartMs = 199420, EndMs = 202190, Text = "Before the code ever reaches you" },
+            new LyricLine { StartMs = 202240, EndMs = 206510, Text = "Thirty years of building, while they were still in school" },
+            new LyricLine { StartMs = 206560, EndMs = 208310, Text = "Giga-Soft" },
+            new LyricLine { StartMs = 208360, EndMs = 213670, Text = "Pro-Essentials — built it first" },
+            new LyricLine { StartMs = 213720, EndMs = 216270, Text = "I'm the one who built it first" },
+            new LyricLine { StartMs = 216320, EndMs = 219550, Text = "Watch them scramble, watch them thirst" },
+            new LyricLine { StartMs = 219600, EndMs = 221730, Text = "P.E. Query running deep" },
+            new LyricLine { StartMs = 221780, EndMs = 223870, Text = "While the hyped charts lose their sleep" },
+            new LyricLine { StartMs = 223920, EndMs = 226650, Text = "I set this A.P.I. on fire" },
+            new LyricLine { StartMs = 226700, EndMs = 228990, Text = "Built for A.I., built higher" },
+            new LyricLine { StartMs = 229040, EndMs = 230410, Text = "They can copy what they want" },
+            new LyricLine { StartMs = 230460, EndMs = 239950, Text = "But they'll always be the response to what I already done" },
+            new LyricLine { StartMs = 240000, EndMs = 243000, Text = "To what I already done" },
+        };
+
+        public static LyricLine? GetLine(int currentMs) {
+            foreach (var line in Lines)
+                if (currentMs >= line.StartMs && currentMs < line.EndMs) return line;
+            return null; }
+    }
+}

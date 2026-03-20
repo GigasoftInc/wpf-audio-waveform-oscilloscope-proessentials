@@ -1,0 +1,196 @@
+<Window x:Class="AudioWaveform.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Gigasoft="clr-namespace:Gigasoft.ProEssentials;assembly=Gigasoft.ProEssentialsWpf"
+        mc:Ignorable="d"
+        Title="ProEssentials — Audio Waveform Oscilloscope"
+        Height="900" Width="1700"
+        MinHeight="600" MinWidth="1100"
+        UseLayoutRounding="True"
+        Closing="Window_Closing">
+
+    <Window.Resources>
+        <!-- ── Dark theme colors ─────────────────────────────────────────── -->
+        <SolidColorBrush x:Key="DarkBg"      Color="#FF001A20"/>
+        <SolidColorBrush x:Key="DarkPanel"   Color="#FF002B35"/>
+        <SolidColorBrush x:Key="AccentCyan"  Color="#FF00E5E5"/>
+        <SolidColorBrush x:Key="AccentGreen" Color="#FF00FF00"/>
+        <SolidColorBrush x:Key="AccentRed"   Color="#FFFF3030"/>
+        <SolidColorBrush x:Key="TextLight"   Color="#FFE0E0E0"/>
+        <SolidColorBrush x:Key="TextDim"     Color="#FF808080"/>
+
+        <!-- ── Playlist item style ──────────────────────────────────────── -->
+        <Style x:Key="SongItemStyle" TargetType="ListBoxItem">
+            <Setter Property="Foreground"        Value="{StaticResource TextLight}"/>
+            <Setter Property="Background"        Value="Transparent"/>
+            <Setter Property="Padding"           Value="8,5"/>
+            <Setter Property="FontFamily"        Value="Consolas"/>
+            <Setter Property="FontSize"          Value="12"/>
+            <Setter Property="Cursor"            Value="Hand"/>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#FF003D4D"/>
+                    <Setter Property="Foreground" Value="{StaticResource AccentCyan}"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FF002530"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- ── Main button style ─────────────────────────────────────────── -->
+        <Style x:Key="DarkButtonStyle" TargetType="Button">
+            <Setter Property="Background"      Value="#FF003D4D"/>
+            <Setter Property="Foreground"      Value="{StaticResource AccentCyan}"/>
+            <Setter Property="BorderBrush"     Value="{StaticResource AccentCyan}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontFamily"      Value="Consolas"/>
+            <Setter Property="FontSize"        Value="13"/>
+            <Setter Property="FontWeight"      Value="Bold"/>
+            <Setter Property="Padding"         Value="14,6"/>
+            <Setter Property="Cursor"          Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="3">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FF005566"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#FF007799"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- ── Active/toggled button style (mode is ON) ──────────────────── -->
+        <Style x:Key="DarkButtonActiveStyle" TargetType="Button"
+               BasedOn="{StaticResource DarkButtonStyle}">
+            <Setter Property="Background"  Value="#FF005F30"/>
+            <Setter Property="BorderBrush" Value="#FF00FF88"/>
+            <Setter Property="Foreground"  Value="#FF00FF88"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Background="{StaticResource DarkBg}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>   <!-- toolbar -->
+            <RowDefinition Height="*"/>      <!-- chart   -->
+        </Grid.RowDefinitions>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- Row 0 — Toolbar                                                  -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <Border Grid.Row="0"
+                Background="{StaticResource DarkPanel}"
+                BorderBrush="#FF003D4D" BorderThickness="0,0,0,1"
+                Padding="10,8">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>    <!-- playlist  -->
+                    <ColumnDefinition Width="Auto"/> <!-- controls  -->
+                </Grid.ColumnDefinitions>
+
+                <!-- ── Playlist ─────────────────────────────────────────── -->
+                <ListBox x:Name="SongList"
+                         Grid.Column="0"
+                         Background="Transparent"
+                         BorderThickness="0"
+                         ItemContainerStyle="{StaticResource SongItemStyle}"
+                         SelectionChanged="SongList_SelectionChanged"
+                         Margin="0,0,20,0">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
+
+                <!-- ── Control buttons ──────────────────────────────────── -->
+                <!-- Right-click the CHART (not the buttons) for full menu  -->
+                <StackPanel Grid.Column="1"
+                            Orientation="Horizontal"
+                            VerticalAlignment="Center">
+
+                    <Button x:Name="BtnPlay"
+                            Style="{StaticResource DarkButtonStyle}"
+                            Content="▶  Play"
+                            Click="BtnPlay_Click"
+                            Margin="0,0,5,0"/>
+
+                    <Button x:Name="BtnStop"
+                            Style="{StaticResource DarkButtonStyle}"
+                            Content="■  Stop"
+                            Click="BtnStop_Click"
+                            Margin="0,0,5,0"/>
+
+                    <Button x:Name="BtnReset"
+                            Style="{StaticResource DarkButtonStyle}"
+                            Content="↺  Reset"
+                            Click="BtnReset_Click"
+                            Margin="0,0,5,0"/>
+
+                    <Button x:Name="BtnOScope"
+                            Style="{StaticResource DarkButtonStyle}"
+                            Content="⊙  O-Scope"
+                            Click="BtnOScope_Click"
+                            Margin="0,0,5,0"/>
+
+                    <Button x:Name="BtnDb"
+                            Style="{StaticResource DarkButtonStyle}"
+                            Content="≋  dBFS"
+                            Click="BtnDb_Click"
+                            Margin="0,0,5,0"/>
+
+                    <Button x:Name="BtnLyrics"
+                            Style="{StaticResource DarkButtonStyle}"
+                            Content="🎵 Lyrics"
+                            Click="BtnLyrics_Click"
+                            Margin="0,0,5,0"/>
+
+                    <Button x:Name="BtnOverlap"
+                            Style="{StaticResource DarkButtonStyle}"
+                            Content="⊡ Overlap"
+                            Click="BtnOverlap_Click"
+                            Margin="0,0,12,0"/>
+
+                    <!-- ── Time display ──────────────────────────────────── -->
+                    <Border Background="#FF001520"
+                            BorderBrush="#FF003D4D"
+                            BorderThickness="1"
+                            CornerRadius="3"
+                            Padding="10,5">
+                        <TextBlock x:Name="TimeDisplay"
+                                   Text="0:00.000"
+                                   Foreground="{StaticResource AccentCyan}"
+                                   FontFamily="Consolas"
+                                   FontSize="14"
+                                   FontWeight="Bold"
+                                   VerticalAlignment="Center"/>
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- Row 1 — Chart                                                    -->
+        <!-- Right-click anywhere on the chart for the full options menu     -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <Gigasoft:PesgoWpf x:Name="Pesgo1"
+                           Grid.Row="1"
+                           Loaded="Pesgo1_Loaded"/>
+    </Grid>
+
+</Window>
